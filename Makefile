@@ -40,7 +40,7 @@ code/init: packages/install/gitversion packages/install/gh packages/install/yq
 	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyName = "$(PROJECT)"' $(PROJECT)/$(PROJECT).csproj
 	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyName = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).csproj
 ifeq ($(OS),darwin)
-    @sed -i '' "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
+	@sed -i '' "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
 else
-    @sed -i "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
+	@sed -i "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
 endif
