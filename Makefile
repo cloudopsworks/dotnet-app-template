@@ -31,11 +31,11 @@ code/init: packages/install/gitversion packages/install/gh packages/install/yq
 	$(eval $@_OWNER := $(shell $(GH) repo view --json 'name,owner' -q '.owner.login'))
 	@mv HelloWorldApi.sln $(PROJECT).sln
 	@mv HelloWorldApi $(PROJECT)
-	@mv HelloWorldApi.Test $(PROJECT).Test
-	@mv HelloWorldApi.Test.Integration $(PROJECT).Test.Integration
+	@mv HelloWorldApi.Tests $(PROJECT).Tests
+	@mv HelloWorldApi.Tests.Integration $(PROJECT).Tests.Integration
 	@mv $(PROJECT)/HelloWorldApi.csproj $(PROJECT)/$(PROJECT).csproj
-	@mv $(PROJECT).Test/HelloWorldApi.Test.csproj $(PROJECT).Test/$(PROJECT).Test.csproj
-	@mv $(PROJECT).Test.Integration/HelloWorldApi.Test.Integration.csproj $(PROJECT).Test.Integration/$(PROJECT).Test.Integration.csproj
+	@mv $(PROJECT).Tests/HelloWorldApi.Tests.csproj $(PROJECT).Tests/$(PROJECT).Tests.csproj
+	@mv $(PROJECT).Tests.Integration/HelloWorldApi.Tests.Integration.csproj $(PROJECT).Tests.Integration/$(PROJECT).Tests.Integration.csproj
 	@$(YQ) eval -i '.dotnet.project_path = "$(PROJECT)"' .github/vars/inputs-global.yaml
 	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyName = "$(PROJECT)"' $(PROJECT)/$(PROJECT).csproj
 	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyName = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).csproj
