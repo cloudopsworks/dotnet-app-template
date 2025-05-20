@@ -36,9 +36,9 @@ code/init: packages/install/gitversion packages/install/gh packages/install/yq
 	@mv $(PROJECT)/HelloWorldApi.csproj $(PROJECT)/$(PROJECT).csproj
 	@mv $(PROJECT).Tests/HelloWorldApi.Tests.csproj $(PROJECT).Tests/$(PROJECT).Tests.csproj
 	@mv $(PROJECT).Tests.Integration/HelloWorldApi.Tests.Integration.csproj $(PROJECT).Tests.Integration/$(PROJECT).Tests.Integration.csproj
-	@$(YQ) eval -i '.dotnet.project_path = "$(PROJECT)"' .github/vars/inputs-global.yaml
-	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyName = "$(PROJECT)"' $(PROJECT)/$(PROJECT).csproj
-	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyName = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).csproj
+	@$(YQ) eval -i -px -ox '.dotnet.project_path = "$(PROJECT)"' .github/vars/inputs-global.yaml
+	@$(YQ) eval -i -px -ox '.Project.PropertyGroup.AssemblyName = "$(PROJECT)"' $(PROJECT)/$(PROJECT).csproj
+	@$(YQ) eval -i -px -ox '.Project.PropertyGroup.AssemblyName = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).csproj
 ifeq ($(OS),darwin)
 	@sed -i '' "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
 else
