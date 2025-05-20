@@ -8,13 +8,13 @@ namespace HelloWorldApi.Tests.Integration;
 [TestFixture]
 public class HealthCheckIntegrationTests
 {
-    private WebApplicationFactory<Program> _factory;
+    private WebApplicationFactory<HelloWorldApi> _factory;
     private HttpClient _client;
 
     [OneTimeSetUp]
     public void Setup()
     {
-        _factory = new WebApplicationFactory<Program>();
+        _factory = new WebApplicationFactory<HelloWorldApi>();
         _client = _factory.CreateClient();
     }
 
@@ -24,12 +24,15 @@ public class HealthCheckIntegrationTests
         // Act
         var response = await _client.GetAsync("/health");
         var content = await response.Content.ReadAsStringAsync();
-        var json = JsonSerializer.Deserialize<Dictionary<string, string>>(content);
+        var result = JsonSerializer.Deserialize<HealthResponse>(content, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
 
         // Assert
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-        Assert.That(json, Is.Not.Null);
-        Assert.That(json!["status"], Is.EqualTo("healthy"));
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result!.Status, Is.EqualTo("healthy"));
     }
 
     [Test]

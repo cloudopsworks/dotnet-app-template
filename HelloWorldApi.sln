@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldApi", "HelloWorld
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldApi.Tests", "HelloWorldApi.Tests\HelloWorldApi.Tests.csproj", "{8F9D2B4A-1E5C-4D6F-8B3A-987654321DEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldApi.Tests.Integration", "HelloWorldApi.Tests.Integration\HelloWorldApi.Tests.Integration.csproj", "{8F9D2B4A-1E5C-4D6F-8B3A-987654321FEF}"
+EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
         Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,9 @@ Global
         {8F9D2B4A-1E5C-4D6F-8B3A-987654321DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
         {8F9D2B4A-1E5C-4D6F-8B3A-987654321DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
         {8F9D2B4A-1E5C-4D6F-8B3A-987654321DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+        {8F9D2B4A-1E5C-4D6F-8B3A-987654321FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {8F9D2B4A-1E5C-4D6F-8B3A-987654321FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {8F9D2B4A-1E5C-4D6F-8B3A-987654321FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {8F9D2B4A-1E5C-4D6F-8B3A-987654321FEF}.Release|Any CPU.Build.0 = Release|Any CPU
     EndGlobalSection
 EndGlobal

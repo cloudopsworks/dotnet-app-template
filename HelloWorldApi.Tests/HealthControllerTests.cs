@@ -1,8 +1,9 @@
 
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 
-namespace HelloWorldApi.Tests.Controllers;
+namespace HelloWorldApi.Tests;
 
 [TestFixture]
 public class HealthControllerTests
@@ -33,7 +34,8 @@ public class HealthControllerTests
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        var value = result!.Value as dynamic;
-        Assert.That(value.status.ToString(), Is.EqualTo("healthy"));
+        var value = result!.Value as HealthResponse;
+        Assert.That(value, Is.Not.Null);
+        Assert.That(value!.Status, Is.EqualTo("healthy"));
     }
 }
