@@ -13,12 +13,13 @@ version: packages/install/gitversion packages/install/yq
 	$(call assert-set,YQ)
 ifeq ($(GIT_IS_TAG),1)
 	@echo "$(GIT_TAG)" | sed -E 's/^v([0-9]+\.[0-9]+\.[0-9]+((-alpha|-beta).[0-9]?)?)(\+deploy-.*)?$$/\1/g' > VERSION
-	@mvn --batch-mode versions:set -DnewVersion=$(shell echo "$(GIT_TAG)" | sed 's/^v//')
-	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell echo "$(GIT_TAG)" | 's/^v([0-9]+\.[0-9]+\.[0-9]+)((-alpha|-beta).[0-9]?)?(\+deploy-.*)?$$/\1/g')"' $(PROJECT).sln
-	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell echo "$(GIT_TAG)" | sed 's/^v//')"'
+	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell echo "$(GIT_TAG)" | 's/^v([0-9]+\.[0-9]+\.[0-9]+)((-alpha|-beta).[0-9]?)?(\+deploy-.*)?$$/\1/g')"' $(PROJECT)/$(PROJECT).sln
+	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell echo "$(GIT_TAG)" | sed 's/^v//')"' $(PROJECT)/$(PROJECT).sln
 else
 	# Translates + in version to - for helm/docker compatibility
 	@echo "$(shell $(GITVERSION) -output json -showvariable FullSemVer | tr '+' '-')" > VERSION
+	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).sln
+	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell $(GITVERSION) -output json -showvariable FullSemVer | tr '+' '-')"' $(PROJECT)/$(PROJECT).sln
 endif
 
 # Modify pom.xml to change the project name with the $(PROJECT) variable
