@@ -3,12 +3,17 @@ organization_unit: "ORG_UNIT"
 environment_name: "ENV_NAME"
 repository_owner: "REPO_OWNER" # Required
 #
-## Default Java version is 21, uncomment to build with different JDK, default dist is temurin, uncomment to use different dist
-## Image variant is alpine by default, uncomment to use different image variant for the specified dist
-#java:
-#  version: 17
-#  dist: temurin
+## Default .Net version is 9, uncomment to build with different SDK, default dist is aspnet, uncomment to use different dist
+## Image variant is not supported right now
+dotnet:
+#  version: 9.0
+#  dist: aspnet | runtime | sdk
 #  image_variant: alpine
+#  .NET Source Project Configuration
+  project_path: "HelloWorldApi"
+#  tests:
+#    project_path: "HelloWorldApi.Tests" # (optional) Defaults to {dotnet.project_path}.Tests
+#    integration_project_path: "HelloWorldApi.Tests.Integration" # (optional) Defaults to {dotnet.project_path}.Tests.Integration
 #
 # Set Snyk processing to true if want to enable, the tool is disabled by default
 #snyk:
@@ -22,14 +27,14 @@ repository_owner: "REPO_OWNER" # Required
 #sonarqube:
 #  enabled: true
 #  fail_on_quality_gate: true
-#  sources_path: "src/"
-#  binaries_path: "target/classes"
-#  libraries_path: "target/libs/**/*.jar" # defaults to blank
-#  tests_path: "src/"
-#  tests_binaries: "target/test-classes"
-#  tests_inclusions: "src/**/test/**/*"
-#  tests_libraries: "target/libs/**/*.jar" # defaults to blank
-#  exclusions: "target/**,"src/**/test/**/*"
+#  sources_path: "{dotnet.project_path}/" 
+#  binaries_path: "{dotnet.project_path}/bin"
+#  libraries_path: "{dotnet.project_path}/bin" # defaults to blank
+#  tests_path: "{dotnet.project_path}"
+#  tests_binaries: "{dotnet.project_path}.Tests/bin/*,{dotnet.project_path}.Tests.Integration/bin/*"
+#  tests_inclusions: "{dotnet.project_path}.Tests/*,{dotnet.project_path}.Tests.Integration/*"
+#  tests_libraries: "{dotnet.project_path}.Tests/bin/*,{dotnet.project_path}.Tests.Integration/bin/*" # defaults to blank
+#  exclusions: "{dotnet.project_path}/obj/*,{dotnet.project_path}.Tests/*,{dotnet.project_path}.Tests.Integration/*"
 #  extra_exclusions:
 #  branch_disabled: true # uncomment only if you are using Community Sonarqube
 #
@@ -58,7 +63,7 @@ repository_owner: "REPO_OWNER" # Required
 #  ARG3=value3
 #
 # Custom command that will be placed as startup script in dockerfile
-#custom_run_command: java -jar app.jar
+#custom_run_command: dotnet run
 #
 # Custom User Group Command, this command can be uncommented in some cases to cover the proper
 # User creation on images like based on Busybox or Redhat UBI-8/9 or Fedora
@@ -69,8 +74,10 @@ repository_owner: "REPO_OWNER" # Required
 # Path where the API definitions are stored if different of default ./apifiles
 #api_files_dir: "relative-path-to-apidefs"
 #
-# Optional Additional ENV variables
-#maven_options: "-T 1C -Dmaven.wagon.http.retryHandler.count=3"
+# Optional Additional dotnet options for build defaults to the below value
+#build_options: "--configuration Release"
+# Optional Additional dotnet options for tests
+#test_options: ""
 #
 # Preview configuration, if enabled will create a preview environment for each PR
 #preview:

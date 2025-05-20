@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <AssemblyName>HelloWorldApi</AssemblyName>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <IsPackable>true</IsPackable>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
