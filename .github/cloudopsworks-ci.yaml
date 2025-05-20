@@ -4,8 +4,7 @@
 #            Distributed Under Apache v2.0 License
 #
 zipGlobs:
-  - target/libs/**
-  - target/*.jar
+  - "**/bin/**"
   - conf/**
 excludeGlobs:
   - Dockerfile
@@ -13,6 +12,7 @@ excludeGlobs:
   - .dockerignore
   - .git*
   - .git/
+  - "**/obj/**"
   - OWNER*
   - README.md
   - jenkins*

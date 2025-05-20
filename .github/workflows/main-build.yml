@@ -72,22 +72,22 @@ jobs:
         id: config
         uses: ./bp/ci/config
 
-      - name: Java Build and Test
+      - name: .Net Build and Test
         id: build
-        uses: ./bp/ci/java/build
+        uses: ./bp/ci/donet/build
         with:
           bot_user: ${{ vars.BOT_USER }}
           token: ${{ secrets.BOT_TOKEN }}
 
       - name: Deploy Component
         if: steps.config.outputs.is_library == 'true'
-        uses: ./bp/ci/java/deploy
+        uses: ./bp/ci/dotnet/deploy
         with:
           bot_user: ${{ vars.BOT_USER }}
           token: ${{ secrets.BOT_TOKEN }}
 
       - name: Save Build Artifacts
-        uses: ./bp/ci/java/artifacts
+        uses: ./bp/ci/dotnet/artifacts
 
       - name: Save Api Artifacts
         if: steps.config.outputs.apis_enabled == 'true'
@@ -97,12 +97,12 @@ jobs:
         if: |
           (steps.config.outputs.container_enabled == 'true') &&
           (steps.config.outputs.is_library != 'true')
-        uses: ./bp/ci/java/container
+        uses: ./bp/ci/dotnet/container
         with:
           semver: ${{ steps.build.outputs.semver }}
-          java_version: ${{ steps.build.outputs.java_version }}
-          java_dist: ${{ steps.build.outputs.java_dist }}
-          java_image_variant: ${{ steps.build.outputs.java_image_variant }}
+          dotnet_version: ${{ steps.build.outputs.dotnet_version }}
+          dotnet_dist: ${{ steps.build.outputs.dotnet_dist }}
+          dotnet_image_variant: ${{ steps.build.outputs.dotnet_image_variant }}
           environment: ${{ steps.config.outputs.environment }}
           is_release: ${{ steps.config.outputs.is_release }}
           default_registry_address: ${{ vars.DOCKER_REGISTRY_ADDRESS }}
@@ -164,7 +164,6 @@ jobs:
           is_pre_release: ${{ needs.code-build.outputs.is_pre_release == 'true' }}
           files_globs: |
             *.zip
-            *.jar
           token: ${{ secrets.BOT_TOKEN }}
 
   scan:
