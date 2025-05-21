@@ -1,4 +1,4 @@
-export PROJECT ?= $(shell basename $(shell pwd))
+export PROJECT ?= $(shell basename $(shell pwd) | awk -F'-' '{for(i=1;i<=NF;i++){printf toupper(substr($$i,1,1)) substr($$i,2)} }')
 export MOD_NAME := $(shell ls -1 *.sln | sed -E 's/(.*)\.sln/\1/')
 TRONADOR_AUTO_INIT := true
 
@@ -42,6 +42,8 @@ code/init: packages/install/gitversion packages/install/gh packages/install/yq
 	@$(YQ) eval -i -px -ox '.Project.PropertyGroup.AssemblyName = "$(PROJECT)"' $(PROJECT)/$(PROJECT).csproj
 	@$(YQ) eval -i -px -ox '.Project.PropertyGroup.AssemblyVersion = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).csproj
 	@$(YQ) eval -i -px -ox '.Project.PropertyGroup.Version = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).csproj
+	@$(YQ) eval -i -px -ox '.Project.ItemGroup[1].ProjectReference = "../$(PROJECT)/$(PROJECT).csproj"' $(PROJECT).Tests/$(PROJECT).Tests.csproj
+	@$(YQ) eval -i -px -ox '.Project.ItemGroup[1].ProjectReference = "../$(PROJECT)/$(PROJECT).csproj"' $(PROJECT).Tests.Integration/$(PROJECT).Tests.Integration.csproj
 ifeq ($(OS),darwin)
 	@sed -i '' "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
 else
