@@ -16,7 +16,7 @@ size-XS:
 - any: [ '*Dockerfile' ]
 
 size-S:
-- any: [ '*pom.xml', 'charts/**/*' ]
+- any: [ '**/*.csproj', '*.sln', 'charts/**/*' ]
 
 size-XL:
-- any: [ '**/*.java', '!*Dockerfile', '!*pom.xml', '!charts/**/*' ]
+- any: [ '**/*.cs', '!*Dockerfile', '!**/*.csproj', '!*.sln', '!charts/**/*' ]
