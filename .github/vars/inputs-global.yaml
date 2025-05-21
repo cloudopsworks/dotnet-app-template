@@ -79,6 +79,9 @@ dotnet:
 # Optional Additional dotnet options for tests
 #test_options: ""
 #
+# Optional Additional dotnet options for binary publishing
+#publsih_options: ""
+#
 # Preview configuration, if enabled will create a preview environment for each PR
 #preview:
 #  enabled: true
