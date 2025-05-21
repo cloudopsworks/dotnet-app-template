@@ -36,6 +36,6 @@ public class HealthControllerTests
         Assert.That(result, Is.Not.Null);
         var value = result!.Value as HealthResponse;
         Assert.That(value, Is.Not.Null);
-        Assert.That(value!.Status, Is.EqualTo("healthy"));
+        Assert.That(value.Status, Is.EqualTo("healthy"));
     }
 }

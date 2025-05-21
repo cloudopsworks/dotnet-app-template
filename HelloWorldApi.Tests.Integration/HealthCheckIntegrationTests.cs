@@ -32,7 +32,7 @@ public class HealthCheckIntegrationTests
         // Assert
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         Assert.That(result, Is.Not.Null);
-        Assert.That(result!.Status, Is.EqualTo("healthy"));
+        Assert.That(result.Status, Is.EqualTo("healthy"));
     }
 
     [Test]
