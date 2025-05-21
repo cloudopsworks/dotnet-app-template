@@ -1,2 +1,2 @@
-# java-app-template
-Java Maven Application Template with Github Action Gitops
+# dotnet-app-template
+.Net Application Template with Github Action Gitops
