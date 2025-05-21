@@ -11,15 +11,16 @@ YQ ?= $(INSTALL_PATH)/yq
 version: packages/install/gitversion packages/install/yq
 	$(call assert-set,GITVERSION)
 	$(call assert-set,YQ)
+    $(eval MOD_NAME := $(shell ls -1 *.sln | sed -E 's/(.*)\.sln/\1/'))
 ifeq ($(GIT_IS_TAG),1)
 	@echo "$(GIT_TAG)" | sed -E 's/^v([0-9]+\.[0-9]+\.[0-9]+((-alpha|-beta).[0-9]?)?)(\+deploy-.*)?$$/\1/g' > VERSION
-	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell echo "$(GIT_TAG)" | 's/^v([0-9]+\.[0-9]+\.[0-9]+)((-alpha|-beta).[0-9]?)?(\+deploy-.*)?$$/\1/g')"' $(PROJECT)/$(PROJECT).sln
-	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell echo "$(GIT_TAG)" | sed 's/^v//')"' $(PROJECT)/$(PROJECT).sln
+	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell echo "$(GIT_TAG)" | 's/^v([0-9]+\.[0-9]+\.[0-9]+)((-alpha|-beta).[0-9]?)?(\+deploy-.*)?$$/\1/g')"' $(MOD_NAME)/$(MOD_NAME).csproj
+	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell echo "$(GIT_TAG)" | sed 's/^v//')"' $(MOD_NAME)/$(MOD_NAME).csproj
 else
 	# Translates + in version to - for helm/docker compatibility
 	@echo "$(shell $(GITVERSION) -output json -showvariable FullSemVer | tr '+' '-')" > VERSION
-	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(PROJECT)/$(PROJECT).sln
-	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell $(GITVERSION) -output json -showvariable FullSemVer | tr '+' '-')"' $(PROJECT)/$(PROJECT).sln
+	@$(YQ) eval -i '.Project.PropertyGroup.AssemblyVersion = "$(shell $(GITVERSION) -output json -showvariable MajorMinorPatch | tr '+' '-')"' $(MOD_NAME)/$(MOD_NAME).csproj
+	@$(YQ) eval -i '.Project.PropertyGroup.Version = "$(shell $(GITVERSION) -output json -showvariable FullSemVer | tr '+' '-')"' $(MOD_NAME)/$(MOD_NAME).csproj
 endif
 
 # Modify pom.xml to change the project name with the $(PROJECT) variable
