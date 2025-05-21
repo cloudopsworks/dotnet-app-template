@@ -44,3 +44,4 @@ ifeq ($(OS),darwin)
 else
 	@sed -i "s/HelloWorldApi/$(PROJECT)/g" $(PROJECT).sln
 endif
+	@echo "Initialization of $(PROJECT) completed."
