@@ -74,7 +74,7 @@ jobs:
 
       - name: .Net Build and Test
         id: build
-        uses: ./bp/ci/donet/build
+        uses: ./bp/ci/dotnet/build
         with:
           bot_user: ${{ vars.BOT_USER }}
           token: ${{ secrets.BOT_TOKEN }}
