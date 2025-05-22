@@ -2,6 +2,7 @@
 environment: "dev|uat|prod|demo"
 runner_set: "RUNNER-ENV"
 #disable_deploy: true
+#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
 container_registry: REGISTRY
 cluster_name: CLUSTER_NAME
 namespace: NAMESPACE

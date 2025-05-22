@@ -1,6 +1,7 @@
 environment: "dev|uat|prod|demo"
 # This file contains the environment variables for the Kubernetes deployment
 runner_set: "RUNNER-ENV"
+#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
 #
 # The following are for cloud specific configurations
 # These will be used to filter the secrets from the secret manager

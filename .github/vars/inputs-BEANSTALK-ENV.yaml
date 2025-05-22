@@ -4,6 +4,7 @@ runner_set: "RUNNER-ENV"
 versions_bucket: "VERSIONS_BUCKET"
 #logs_bucket: "LOGS_BUCKET"
 #blue_green: true # uncomment for Prod environment to support blue/green deploy
+#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
 container_registry: REGISTRY # optional if Preview = false, can comment out
 aws:
   region: "AWS_REGION"
@@ -117,11 +118,15 @@ beanstalk:
     vpc_id: VPC_ID
   ##
   # Optional variable for mapping ports to backend ports:
-  port_mappings: []
-#    - name: default
-#      from_port: 80
-#      to_port: 8081
-#      protocol: HTTP
+  port_mappings:
+    # Sample entry for the sample application in template
+    - name: default
+      from_port: 80
+      to_port: 80
+      protocol: HTTP
+      health_check:
+        enabled: true
+        path: "/health"
 #    - name: port443
 #      from_port: 443
 #      to_port: 8443
@@ -146,11 +151,20 @@ beanstalk:
   extra_tags: {}
   #    key: value
   #    key2: value2
-  extra_settings: []
-  #  - name: "PORT"
-  #    namespace: "aws:elasticbeanstalk:application:environment"
-  #    resource: ""
-  #    value: "8080"
+  extra_settings:
+    # Sample entries for the sample application in template
+    - name: "PORT"
+      namespace: "aws:elasticbeanstalk:application:environment"
+      resource: ""
+      value: "8080"
+    - name: "ASPNETCORE_URLS"
+      namespace: "aws:elasticbeanstalk:application:environment"
+      resource: ""
+      value: "http://localhost:8080"
+    - name: "Application Healthcheck URL"
+      namespace: "aws:elasticbeanstalk:application"
+      resource: ""
+      value: "/health"
   #    - name: SETTING_NAME
   #      namespace: aws:NAMESPACE
   #      resource: ""
