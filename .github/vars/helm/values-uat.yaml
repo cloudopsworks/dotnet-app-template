@@ -1,10 +1,12 @@
 #annotations: []
 #podAnnotations: []
 #replicaCount: 1
-#env: []
+env:
+  - name: ASPNETCORE_URLS
+    value: "http://localhost:8080"
 probe:
-  path: /healthz
-#  port: 8082
+  path: /health
+#  port: 8080
 startupProbe:
   enabled: true
 #livenessProbe:
