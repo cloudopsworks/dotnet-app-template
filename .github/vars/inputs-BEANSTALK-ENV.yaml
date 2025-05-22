@@ -147,11 +147,19 @@ beanstalk:
   extra_tags: {}
   #    key: value
   #    key2: value2
-  extra_settings: []
-  #  - name: "PORT"
-  #    namespace: "aws:elasticbeanstalk:application:environment"
-  #    resource: ""
-  #    value: "8080"
+  extra_settings:
+    - name: "PORT"
+      namespace: "aws:elasticbeanstalk:application:environment"
+      resource: ""
+      value: "8080"
+    - name: "ASPNETCORE_URLS"
+      namespace: "aws:elasticbeanstalk:application:environment"
+      resource: ""
+      value: "http://localhost:8080"
+    - name: "Application Healthcheck URL"
+      namespace: "aws:elasticbeanstalk:application"
+      resource: ""
+      value: "/health"
   #    - name: SETTING_NAME
   #      namespace: aws:NAMESPACE
   #      resource: ""
