@@ -118,11 +118,15 @@ beanstalk:
     vpc_id: VPC_ID
   ##
   # Optional variable for mapping ports to backend ports:
-  port_mappings: []
-#    - name: default
-#      from_port: 80
-#      to_port: 8081
-#      protocol: HTTP
+  port_mappings:
+    # Sample entry for the sample application in template
+    - name: default
+      from_port: 80
+      to_port: 80
+      protocol: HTTP
+      health_check:
+        enabled: true
+        path: "/health"
 #    - name: port443
 #      from_port: 443
 #      to_port: 8443
@@ -148,6 +152,7 @@ beanstalk:
   #    key: value
   #    key2: value2
   extra_settings:
+    # Sample entries for the sample application in template
     - name: "PORT"
       namespace: "aws:elasticbeanstalk:application:environment"
       resource: ""
