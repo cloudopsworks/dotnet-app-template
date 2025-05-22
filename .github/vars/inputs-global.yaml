@@ -6,11 +6,11 @@ repository_owner: "REPO_OWNER" # Required
 ## Default .Net version is 9, uncomment to build with different SDK, default dist is aspnet, uncomment to use different dist
 ## Image variant is not supported right now
 dotnet:
+  # .NET Source Project Configuration
+  project_path: "HelloWorldApi"
 #  version: 9.0
 #  dist: aspnet | runtime | sdk
 #  image_variant: alpine
-#  .NET Source Project Configuration
-  project_path: "HelloWorldApi"
 #  configuration: "Release" # uncomment and set accordingly if required, also in each environment can be specified
 #  tests:
 #    project_path: "HelloWorldApi.Tests" # (optional) Defaults to {dotnet.project_path}.Tests
@@ -76,7 +76,8 @@ dotnet:
 #api_files_dir: "relative-path-to-apidefs"
 #
 # Optional Additional dotnet options for build defaults to the below value
-#build_options: "--configuration Release"
+#build_options: ""
+#
 # Optional Additional dotnet options for tests
 #test_options: ""
 #
