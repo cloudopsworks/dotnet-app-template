@@ -4,6 +4,7 @@ runner_set: "RUNNER-ENV"
 versions_bucket: "VERSIONS_BUCKET"
 #logs_bucket: "LOGS_BUCKET"
 #blue_green: true # uncomment for Prod environment to support blue/green deploy
+#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
 container_registry: REGISTRY # optional if Preview = false, can comment out
 aws:
   region: "AWS_REGION"

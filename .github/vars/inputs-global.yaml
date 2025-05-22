@@ -11,6 +11,7 @@ dotnet:
 #  image_variant: alpine
 #  .NET Source Project Configuration
   project_path: "HelloWorldApi"
+#  configuration: "Release" # uncomment and set accordingly if required, also in each environment can be specified
 #  tests:
 #    project_path: "HelloWorldApi.Tests" # (optional) Defaults to {dotnet.project_path}.Tests
 #    integration_project_path: "HelloWorldApi.Tests.Integration" # (optional) Defaults to {dotnet.project_path}.Tests.Integration
