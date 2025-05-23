@@ -25,7 +25,7 @@ else
 endif
 
 # Modify pom.xml to change the project name with the $(PROJECT) variable
-## Code Initialization for Node Project
+## Code Initialization for .Net Project
 code/init: packages/install/gitversion packages/install/gh packages/install/yq
 	$(call assert-set,GITVERSION)
 	$(call assert-set,GH)
