@@ -80,5 +80,6 @@ coverage.*.info
 .vscode/
 
 ### Tronador ###
+.tronador*.mk
 .tronador
 tronador/
