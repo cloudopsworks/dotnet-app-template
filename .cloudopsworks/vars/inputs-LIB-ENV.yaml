@@ -1,6 +1,6 @@
 environment: "dev|uat|prod|demo"
 # This file contains the environment variables for the Kubernetes deployment
-runner_set: "RUNNER-ENV"
+#runner_set: "RUNNER-ENV" # Optional: when using self-hosted runners
 #dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
 #
 # The following are for cloud specific configurations
@@ -22,5 +22,9 @@ runner_set: "RUNNER-ENV"
 #
 # For GCP
 #gcp:
+#  region: "GCP_REGION"
+#  project_id: "GCP_PROJECT"
+#  impersonate_sa: "GCP project Service Account e-mail" # Optional: when existing role is same for build and deploy
+#  build_impresonate_sa: "GCP project Service Account e-mail" # Optional: when existing role is different for build and deploy
 #  secrets_path_filter: /secrets
 #

@@ -40,6 +40,12 @@ dotnet:
 #  extra_exclusions:
 #  branch_disabled: true # uncomment only if you are using Community Sonarqube
 #
+# JIRA Integration for Release Management
+#jira:
+#  enabled: true | false # Defaults to true, set to false to disable, JIRA_INTEGRATION_ENABLED at organization setting enables or disables globally
+#  project_id: "PROJECT ID NUMBER" # Optional, if not set will default to JIRA_INTEGRATION_PROJECT_ID from organization
+#  project_key: "PROJECT KEY" # Optional,  if not set will default to JIRA_INTEGRATION_PROJECT_KEY from organization
+#
 # Set DependencyTrack processing to false if want to disable, the tool is enabled by default
 # type: is one of => Library , Application , Container , Framework , Device , Firmware , File , Operating System
 #       Default type is Application
@@ -48,7 +54,8 @@ dotnet:
 #  type: Application
 #
 # Set if this is a library project
-#isLibrary: true
+#isLibrary: true # DEPRECATED!
+#is_library: true
 #
 # Dockerfile Inline content that will be merged into the Dockerfile
 #docker_inline: |
@@ -90,9 +97,13 @@ dotnet:
 #  enabled: true
 #  kubernetes: true
 #  domain: example.com
+#  azure:
+#    resource_group: PREVIEW_RG
+#  gcp:
+#    project_id: PREVIEW_PROJECT_ID
 #
 # API Gateway configuration, if enabled will deploy apis to the environment api gateway
-# configuration is done under .github/vars/apigw/
+# configuration is done under .cloudopsworks/vars/apigw/
 #apis:
 #  enabled: true
 #
@@ -137,6 +148,6 @@ dotnet:
 # Target Cloud
 cloud: aws | azure | gcp
 # Cloud deployment type depends on the target cloud
-cloud_type: beanstalk | eks | lambda | aks | webapp | function | gke | function | kubernetes
+cloud_type: beanstalk | eks | lambda | aks | webapp | function | gke | appengine | cloudrun | kubernetes
 # Indicate the Runner that will be used for the deployment - usually will be a hosted runner
 # runner_set: "arc-runner-set"
