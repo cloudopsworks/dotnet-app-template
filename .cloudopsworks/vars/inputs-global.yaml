@@ -3,7 +3,7 @@ organization_unit: "ORG_UNIT"
 environment_name: "ENV_NAME"
 repository_owner: "REPO_OWNER" # Required
 #
-## Default .Net version is 9, uncomment to build with different SDK, default dist is aspnet, uncomment to use different dist
+## Default .Net version is 10, uncomment to build with different SDK, default dist is aspnet, uncomment to use different dist
 ## Image variant is not supported right now
 dotnet:
   # .NET Source Project Configuration
