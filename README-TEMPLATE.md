@@ -8,8 +8,9 @@
 
 ## Agent command policy
 
-The `Makefile` remains for compatibility, but direct Make invocation is deprecated
-for README and Git-flow/version operations. Agents must use the Tronador CLI:
+Use the Tronador CLI (`tronador-cli`, installed as `tronador`) directly for project
+initialization, README generation, and version workflows. The root `Makefile` is
+retained only for compatibility.
 
 - Run `tronador readme build` to render README output. If committed target/dependency
   documentation also needs refresh, run `tronador docs targets` first.
@@ -60,7 +61,7 @@ Use this file as the base README for repositories created from this template.
 - `.cloudopsworks/vars/preview/` – preview-environment configuration.
 - `.cloudopsworks/gitversion_gitflow.yaml` – GitVersion strategy for GitFlow repositories.
 - `.cloudopsworks/gitversion_githubflow.yaml` – GitVersion strategy for GitHub Flow repositories.
-- `Makefile` – template bootstrap and version helper targets.
+- `Makefile` – legacy compatibility wrappers; use the Tronador CLI directly.
 
 ## Quick start
 
@@ -121,6 +122,13 @@ Common optional values to review immediately:
 - `trivy.enabled`
 - `sonarqube.enabled`
 - `dependencyTrack.enabled`
+
+**Artifact packaging:** `zipGlobs` (files to include) and `excludeGlobs` (files
+to omit) have moved out of `.cloudopsworks/cloudopsworks-ci.yaml`. If your
+project needs additional patterns, set either key as a top-level list in
+`.cloudopsworks/vars/inputs-global.yaml`. Each list is merged with the
+[blueprint defaults](https://github.com/cloudopsworks/blueprints/blob/v5.10/artifacts/config/dotnet.yaml)
+rather than replacing them. Omit both keys to use the defaults unchanged.
 
 ## Choose the deployment target
 
@@ -379,7 +387,7 @@ these commands — never fetch or apply template changes manually.
 4. Commit the result with: `chore: upgrade from <template-name> <old-version> → <new-version> +semver: patch`
 5. Use `/cw-release` to create and merge the hotfix PR (see [Release Workflow — use `cw-release`](#release-workflow--use-cw-release)).
 
-> **Note:** `Makefile`, `.github/`, `.cloudopsworks/labeler.yml`, `.cloudopsworks/Makefile`,
+> **Note:** `Makefile`, `.github/`, `.cloudopsworks/labeler.yml`,
 > and `.cloudopsworks/LICENSE` are owned by the template and will be overwritten on every upgrade.
 > Do not edit these files manually in derived repositories.
 
