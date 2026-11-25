@@ -4,6 +4,9 @@ environment: "dev|uat|prod|demo"
 #runner_set: "RUNNER-ENV" # Optional: when using self-hosted runners
 #disable_deploy: true
 container_registry: REGISTRY # allways required for GCP CloudRun
+# Required:
+#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
+#
 
 gcp:
   region: "GCP_REGION"

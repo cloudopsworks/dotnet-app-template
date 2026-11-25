@@ -2,7 +2,9 @@
 # Agents: cloud=aws|gcp|azure, cloud_type=none
 environment: "dev|uat|prod|demo"
 #runner_set: "RUNNER-ENV" # Optional: when using self-hosted runners
+# Required:
 #dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
+#
 #
 # The following are for cloud specific configurations
 # These will be used to filter the secrets from the secret manager

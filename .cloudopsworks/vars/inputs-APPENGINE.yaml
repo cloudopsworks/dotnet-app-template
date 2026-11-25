@@ -5,9 +5,10 @@ environment: "dev|uat|prod|demo"
 #disable_deploy: true
 versions_bucket: "VERSIONS_BUCKET"
 #blue_green: true # uncomment for Prod environment to support blue/green deploy
-#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
 #container_registry: REGISTRY # optional if Preview = false, can comment out
-
+# Required:
+#dotnet_configuration: "Release" # Uncomment and set accordingly if the environment use specific MSbuild configuration
+#
 gcp:
   region: "GCP_REGION"
   project_id: "GCP_PROJECT"
@@ -29,32 +30,32 @@ appengine:
   runtime: dotnet9
   type: standard # standard | flexible
   entrypoint_shell: "./your-service-binary" # command executed by App Engine to start the app
-#  iam:
-#    service_account:
+  #iam:
+  #  service_account:
   instance:
     class: B2
-#    auto_scaling:
-#      min: 0
-#      max: 1
-#      max_idle: 1
-#      min_idle: 1
-#      target_cpu: 0.6
-#      target_throughput: 0.6
-#      max_concurrent_requests: 10
-#      min_pending_latency: automatic
-#      max_pending_latency: automatic
-#      cool_down_period: 300
+    #auto_scaling:
+    #  min: 0
+    #  max: 1
+    #  max_idle: 1
+    #  min_idle: 1
+    #  target_cpu: 0.6
+    #  target_throughput: 0.6
+    #  max_concurrent_requests: 10
+    #  min_pending_latency: automatic
+    #  max_pending_latency: automatic
+    #  cool_down_period: 300
     basic_scaling:
       max: 1
       idle_timeout: 300s
-#    manual_scaling:
-#      count: 2
-#  networking:
-#    connector:
-#      create: true
-#      subnet_name: "serverless-subnet"
-#      create: false
-#      name: "<connector name>"
+      #manual_scaling:
+      #  count: 2
+  #networking:
+  #  connector:
+  #    create: true
+  #    subnet_name: "serverless-subnet"
+  #    create: false
+  #    name: "<connector name>"
   # Reference: https://cloud.google.com/appengine/docs/standard/reference/app-yaml?tab=java#handlers_element
   http_handlers: []
   env_variables: { }
